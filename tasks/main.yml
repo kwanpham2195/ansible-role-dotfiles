@@ -1,0 +1,8 @@
+---
+- name: Clone dotfiles from repo
+  git:
+    repo: "{{ dotfiles_repo_url }}"
+    dest: ~/.public_dotfiles
+
+- name: Link dotfiles and exclude meta files
+  command: rcup -f -d .public-dotfiles '{{ excluded_files| map("regex_replace", "^(.*)$", "-x \1 ") }}' #-x README -x LICENSE -x screenshot.png
