@@ -2,6 +2,6 @@
 # vars file for ansible-role-dotfiles
 dotfiles_repo_url: https://repo.rootknecht.net/allaman/ansible-role-dotfiles.git
 excluded_files:
-  - README
+  - README.md
   - LICENSE
   - screenshot.png
