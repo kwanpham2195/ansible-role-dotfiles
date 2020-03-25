@@ -1,4 +1,39 @@
 ---
+- name: Ensure tmp directory is present
+  file:
+    path: "{{ temp_dir }}"
+    state: directory
+
+- name: Ensure dependencies are installed
+  pacman:
+    update_cache: true
+    name: "{{ item }}"
+    state: present
+  loop:
+    - make
+    - git
+    - awk
+
+- name: RCM download package
+  get_url:
+    url: "{{ rcm_url }}"
+    dest: "{{ temp_dir }}"
+  register: download
+
+- name: RCM extract package
+  unarchive:
+    remote_src: true
+    src: "{{ download.dest }}"
+    dest: "{{ temp_dir }}"
+    list_files: true
+  register: extract
+
+- name: RCM install
+  become: yes
+  shell: cd "{{ extract.files[0] }}" && ./configure && make && make install
+  args:
+    chdir: "{{ temp_dir }}"
+
 - name: Clone dotfiles from repo
   git:
     repo: "{{ dotfiles_repo_url }}"
