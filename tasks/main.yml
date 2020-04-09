@@ -38,10 +38,10 @@
 - name: Clone dotfiles from repo
   git:
     repo: "{{ dotfiles_repo_url }}"
-    dest: "{{ ansible_env.HOME }}/.dotfiles"
+    dest: "{{ ansible_env.HOME }}/.public-dotfiles"
 
 - name: Link dotfiles and exclude meta files
-  command: rcup -f '{% for arg1 in excluded_files %}-x {{arg1 }}{% if not loop.last %}{% endif %} {% endfor %}'  #-x README -x LICENSE -x screenshot.png
+  command: rcup -d .public-dotfiles -f '{% for arg1 in excluded_files %}-x {{arg1 }}{% if not loop.last %}{% endif %} {% endfor %}'  #-x README -x LICENSE -x screenshot.png
   args:
     chdir: "{{ ansible_env.HOME }}"
 
