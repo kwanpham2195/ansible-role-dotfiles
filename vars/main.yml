@@ -1,6 +1,6 @@
 ---
 # vars file for ansible-role-dotfiles
-dotfiles_repo_url: https://repo.rootknecht.net/allaman/public-dotfiles.git
+dotfiles_repo_url: https://github.com/Allaman/dotfiles.git
 excluded_files:
   - README.md
   - LICENSE
@@ -9,7 +9,7 @@ gitconfig:
   name: Michael
   username: allaman
   mail: allaman@rootknecht.net
-  # This will store your git credential in plaintext in the container
+  # This will store your git credential in plaintext !
   credential_cache: true
   credential_cache_timeout: 3600
   diff_so_fancy: true

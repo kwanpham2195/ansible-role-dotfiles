@@ -1,38 +1,57 @@
-Role Name
+ansible-role-dotfiles
 =========
 
-A brief description of the role goes here.
+Confguration of dotfiles on a Linux based environment
+
+- Installs RCM
+- Clone dotfile repository
+- Create symlinks via rcup
+- Create global .gitconfig
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Following programs must be in the path:
+
+- awk
+- make
+- git
+
+When running on Arch Linux they are installed by this role. (Sudo permissions required)
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+
+| Variable| Description | default |
+|---------|-------------|---------|
+| dotfiles_repo_url | URL of repo to clone for use with RCM | https://github.com/Allaman/dotfiles.git |
+| gitconfig.name | Name of global git config | Michael |
+| gitconfig.username | Username of global git config | allaman |
+| gitconfig.mail | Mail of global git config | allaman@rootknecht.net |
+| gitconfig.credential_cache | Cache git credentials | true |
+| gitconfig.credential_cache_timeout | How long to store git credentials | 3600 |
+| gitconfig.diff_so_fancy | Use diff-so-fancy as global pager tool | true |
+| gitconfig.neovim_remote | Use NeoVim as global diff tool | true |
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No dependencies
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```
+---
+- name: Playbook
+  hosts: localhost
+  connection: local
+  roles:
+    - ansible-role-dotfiles
+```
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT
