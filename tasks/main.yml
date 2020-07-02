@@ -36,10 +36,24 @@
   args:
     chdir: "{{ temp_dir }}"
 
+- name: Check if dotfiles directory is present
+  stat:
+    path: "{{ ansible_env.HOME }}/.public-dotfiles"
+  register: stat_result
+
 - name: Clone dotfiles from repo
   git:
     repo: "{{ dotfiles_repo_url }}"
     dest: "{{ ansible_env.HOME }}/.public-dotfiles"
+  when: not stat_result.stat.exists
+
+- name: Pull dotfiles from repo
+  git:
+    repo: "{{ dotfiles_repo_url }}"
+    dest: "{{ ansible_env.HOME }}/.public-dotfiles"
+    clone: no
+    update: yes
+  when: stat_result.stat.exists
 
 - name: Link dotfiles and exclude meta files
   command: rcup -d .public-dotfiles -f '{% for arg1 in excluded_files %}-x {{arg1 }}{% if not loop.last %}{% endif %} {% endfor %}'  #-x README -x LICENSE -x screenshot.png
