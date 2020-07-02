@@ -48,11 +48,9 @@
   when: not stat_result.stat.exists
 
 - name: Pull dotfiles from repo
-  git:
-    repo: "{{ dotfiles_repo_url }}"
-    dest: "{{ ansible_env.HOME }}/.public-dotfiles"
-    clone: no
-    update: yes
+  shell: git pull
+  args:
+    chdir: "{{ ansible_env.HOME }}/.public-dotfiles"
   when: stat_result.stat.exists
 
 - name: Link dotfiles and exclude meta files
