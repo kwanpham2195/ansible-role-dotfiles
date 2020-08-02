@@ -3,11 +3,6 @@
 [user]
   email = {{ gitconfig.mail }}
   name = {{ gitconfig.name }}
-{% if gitconfig.diff_so_fancy %}
-[pager]
-  diff = diff-so-fancy | less --tabs=1,5 -RFX
-  show = diff-so-fancy | less --tabs=1,5 -RFX
-{% endif %}
 [credential]
   username = {{ gitconfig.username }}
 {% if gitconfig.credential_cache %}
@@ -22,4 +17,18 @@
     tool = nvr
 [mergetool "nvr"]
     cmd = nvr -s -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd J | wincmd ='<Paste>
+{% endif %}
+{% if gitconfig.delta %}
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = 1337
+    features = decorations
+    whitespace-error-style = 22 reverse
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+[interactive]
+    diffFilter = delta --color-only
 {% endif %}

@@ -8,9 +8,9 @@ excluded_files:
 gitconfig:
   name: Michael
   username: allaman
-  mail: allaman@rootknecht.net
+  mail: michaeljohannpeter@gmail.com
   # This will store your git credential in plaintext !
   credential_cache: true
   credential_cache_timeout: 3600
-  diff_so_fancy: true
+  delta: true
   neovim_remote: true
