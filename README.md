@@ -11,17 +11,8 @@ Confguration of dotfiles on a Linux based environment
 Requirements
 ------------
 
-Following programs must be in the path:
-
-- awk
-- make
-- git
-
-When running on Arch Linux they are installed by this role. (Sudo permissions required)
-
 Role Variables
 --------------
-
 
 | Variable| Description | default |
 |---------|-------------|---------|
@@ -31,13 +22,13 @@ Role Variables
 | gitconfig.mail | Mail of global git config | allaman@rootknecht.net |
 | gitconfig.credential_cache | Cache git credentials | true |
 | gitconfig.credential_cache_timeout | How long to store git credentials | 3600 |
-| gitconfig.diff_so_fancy | Use diff-so-fancy as global pager tool | true |
+| gitconfig.delta | Use delta as git diff enhancement | true |
 | gitconfig.neovim_remote | Use NeoVim as global diff tool | true |
 
 Dependencies
 ------------
 
-No dependencies
+- ansible-role-basic
 
 Example Playbook
 ----------------
