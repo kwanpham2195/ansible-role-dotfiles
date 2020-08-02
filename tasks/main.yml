@@ -4,18 +4,6 @@
     path: "{{ temp_dir }}"
     state: directory
 
-- name: Ensure dependencies are installed
-  become: true
-  pacman:
-    update_cache: true
-    name: "{{ item }}"
-    state: present
-  loop:
-    - make
-    - git
-    - awk
-  when: ansible_os_family == "Archlinux"
-
 - name: RCM download package
   get_url:
     url: "{{ rcm_url }}"
