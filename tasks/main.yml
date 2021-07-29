@@ -26,23 +26,23 @@
 
 - name: Check if dotfiles directory is present
   stat:
-    path: "{{ ansible_env.HOME }}/workspace/github.com/allaman/public-dotfiles"
+    path: "{{ dotfiles_path }}"
   register: stat_result
 
 - name: Clone dotfiles from repo
   git:
     repo: "{{ dotfiles_repo_url }}"
-    dest: "{{ ansible_env.HOME }}/workspace/github.com/allaman/public-dotfiles"
+    dest: "{{ dotfiles_path }}"
   when: not stat_result.stat.exists
 
 - name: Pull dotfiles from repo
   shell: git pull
   args:
-    chdir: "{{ ansible_env.HOME }}/workspace/github.com/allaman/public-dotfiles"
+    chdir: "{{ dotfiles_path }}"
   when: stat_result.stat.exists
 
 - name: Link dotfiles and exclude meta files
-  command: rcup -d public-dotfiles -f '{% for arg1 in excluded_files %}-x {{arg1 }}{% if not loop.last %}{% endif %} {% endfor %}'  #-x README -x LICENSE -x screenshot.png
+  command: rcup -d "{{ dotfiles_path }}" -f '{% for arg1 in excluded_files %}-x {{arg1 }}{% if not loop.last %}{% endif %} {% endfor %}' #-x README -x LICENSE -x screenshot.png
   args:
     chdir: "{{ ansible_env.HOME }}/workspace/github.com/allaman/public-dotfiles"
 
