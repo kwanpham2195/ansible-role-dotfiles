@@ -1,6 +1,17 @@
 ---
 - name: Converge
   hosts: all
+  pre_tasks:
+    - set_fact:
+        dotfiles_path: "{{ ansible_env.HOME }}/.dotfiles"
+        gitconfig:
+          name: infratest
+          username: test
+          mail: max.mustermann@example.com
+          credential_cache: "false"
+          credential_cache_timeout: 600
+          delta: "false"
+          neovim_remote: "false"
   tasks:
     - name: "Include ansible-role-dotfiles"
       include_role:
