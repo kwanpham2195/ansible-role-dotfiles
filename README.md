@@ -1,6 +1,6 @@
 # ansible-role-dotfiles
 
-Confguration of dotfiles on a Linux based environment
+Confguration of dotfiles on a Unix based environment
 
 - Clone dotfile repository
 - Create symlinks via rcup
@@ -19,8 +19,6 @@ Run `molecule test` for testing this role via Docker
 | dotfiles_path     | Path to the cloned repo               | {{ ansible_env.HOME }}/workspace/github.com/allaman/public-dotfiles |
 
 ## Dependencies
-
-- ansible-role-basic
 
 ## Example Playbook
 
