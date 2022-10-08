@@ -2,7 +2,6 @@
 
 Confguration of dotfiles on a Linux based environment
 
-- Installs RCM
 - Clone dotfile repository
 - Create symlinks via rcup
 - Create global .gitconfig
