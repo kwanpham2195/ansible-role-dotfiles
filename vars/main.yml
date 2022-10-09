@@ -9,3 +9,4 @@ dotfiles:
       - README.md
       - LICENSE
       - screenshot.png
+      - config/karabiner
