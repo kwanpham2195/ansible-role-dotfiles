@@ -1,3 +1,0 @@
----
-# defaults file for ansible-role-dotfiles
-temp_dir: /tmp/ansible-role-dotfiles

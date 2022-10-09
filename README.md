@@ -4,6 +4,12 @@ Confguration of dotfiles on a Unix based environment
 
 - Clone up to two dotfile repositories (one public and one private in my case)
 - Create symlinks via rcup
+- Install kubectl-aliases
+- Install zsh-autosuggestions
+- Install fast-syntax-highlightning
+- Install zsh-completions
+- Install Powerlevel10k
+- Install Tmux tpm
 
 ## Test
 
