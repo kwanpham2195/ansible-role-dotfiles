@@ -4,6 +4,7 @@ Confguration of dotfiles on a Unix based environment
 
 - Clone up to two dotfile repositories (one public and one private in my case)
 - Create symlinks via rcup
+- Install fzf
 - Install kubectl-aliases
 - Install zsh-autosuggestions
 - Install fast-syntax-highlightning
