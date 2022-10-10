@@ -1,25 +1,16 @@
 ---
-- name: Check if dotfiles directory is present
-  stat:
-    path: "{{ dotfiles.public.path }}"
-  register: stat_result
-  when: dotfiles.public.enabled|default(false) == true
+- name: Download bootstrap script
+  get_url:
+    dest: /tmp/bootstrap.sh
+    mode: +x
+    url: https://raw.githubusercontent.com/Allaman/dots/main/bootstrap.sh
 
-- name: Clone dotfiles from repo
-  git:
-    repo: "{{ dotfiles.public.repo_url }}"
-    dest: "{{ dotfiles.public.path }}"
-  when: not stat_result.stat.exists and dotfiles.public.enabled|default(false) == true
-
-- name: Pull dotfiles from repo
-  shell: git pull
-  args:
-    chdir: "{{ dotfiles.public.path }}"
-  when: stat_result.stat.exists and dotfiles.public.enabled|default(false) == true
-
-- name: Link dotfiles and exclude meta files
-  command: rcup -d "{{ dotfiles.public.path }}" -f '{% for arg1 in dotfiles.public.excluded_files %}-x {{arg1 }}{% if not loop.last %}{% endif %} {% endfor %}' #-x README -x LICENSE -x screenshot.png
-  when: dotfiles.public.enabled|default(false) == true
+- name: Run bootstrap script
+  ansible.builtin.expect:
+    command: /tmp/bootstrap.sh
+    responses:
+      Question:
+        - 1
 
 - name: Check if private dotfiles directory is present
   stat:
