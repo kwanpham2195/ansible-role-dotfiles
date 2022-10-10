@@ -4,13 +4,10 @@
     dest: /tmp/bootstrap.sh
     mode: +x
     url: https://raw.githubusercontent.com/Allaman/dots/main/bootstrap.sh
+    force: yes
 
 - name: Run bootstrap script
-  ansible.builtin.expect:
-    command: /tmp/bootstrap.sh
-    responses:
-      Question:
-        - 1
+  shell: /tmp/bootstrap.sh
 
 - name: Check if private dotfiles directory is present
   stat:
