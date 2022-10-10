@@ -8,25 +8,3 @@
 
 - name: Run bootstrap script
   shell: /tmp/bootstrap.sh
-
-- name: Check if private dotfiles directory is present
-  stat:
-    path: "{{ dotfiles.private.path }}"
-  register: stat_result
-  when: dotfiles.private.enabled|default(false) == true
-
-- name: Clone dotfiles from repo
-  git:
-    repo: "{{ dotfiles.private.repo_url }}"
-    dest: "{{ dotfiles.private.path }}"
-  when: not stat_result.stat.exists and dotfiles.private.enabled|default(false) == true
-
-- name: Pull dotfiles from repo
-  shell: git pull
-  args:
-    chdir: "{{ dotfiles.private.path }}"
-  when: stat_result.stat.exists and dotfiles.private.enabled|default(false) == true
-
-- name: Link dotfiles and exclude meta files
-  command: rcup -d "{{ dotfiles.private.path }}" -f '{% for arg1 in dotfiles.private.excluded_files %}-x {{arg1 }}{% if not loop.last %}{% endif %} {% endfor %}' #-x README -x LICENSE -x screenshot.png
-  when: dotfiles.private.enabled|default(false) == true

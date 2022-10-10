@@ -1,16 +1,17 @@
 # ansible-role-dotfiles
 
-Confguration of dotfiles on a Unix based environment
+This role consists of two parts:
 
-- Clone up to two dotfile repositories (one public and one private in my case)
-- Create symlinks via rcup
-- Install fzf
-- Install kubectl-aliases
-- Install zsh-autosuggestions
-- Install fast-syntax-highlightning
-- Install zsh-completions
-- Install Powerlevel10k
-- Install Tmux tpm
+1. Run my [bootstrap](https://github.com/Allaman/dots/blob/main/bootstrap.sh) script from my [dots](https://github.com/allaman/dots)
+2. Download various shell plugins/tools
+
+   - fzf
+   - kubectl-aliases
+   - zsh-autosuggestions
+   - fast-syntax-highlightning
+   - zsh-completions
+   - Powerlevel10k
+   - Tmux tpm
 
 ## Test
 
@@ -19,15 +20,6 @@ Run `molecule test` for testing this role via Docker
 ## Requirements
 
 ## Role Variables
-
-| Variable                       | Description                           | default                                                             |
-| ------------------------------ | ------------------------------------- | ------------------------------------------------------------------- |
-| dotfiles.public.enabled        | Enable public dotfiles                | true                                                                |
-| dotfiles.public_repo_url       | URL of repo to clone for use with RCM | https://github.com/Allaman/dotfiles.git                             |
-| dotfiles.public.path           | Path to the cloned repo               | {{ ansible_env.HOME }}/workspace/github.com/allaman/public-dotfiles |
-| dotfiles.public.excluded_files | List of files that are not symlinked  | README.md, LICENSE, screenshot.png                                  |
-
-In addition, you can specify those variables for `dotfiles.private` as well.
 
 ## Dependencies
 
@@ -38,11 +30,6 @@ In addition, you can specify those variables for `dotfiles.private` as well.
 - name: Playbook
   hosts: localhost
   connection: local
-  pre_tasks:
-    - set_fact:
-        dotfiles:
-          public:
-            path: "{{ ansible_env.HOME }}/.dotfiles"
   roles:
     - ansible-role-dotfiles
 ```
