@@ -3,7 +3,7 @@
   get_url:
     dest: /tmp/bootstrap.sh
     mode: +x
-    url: https://raw.githubusercontent.com/Allaman/dots/main/bootstrap.sh
+    url: https://raw.githubusercontent.com/kwanpham2195/dots/main/bootstrap.sh
     force: yes
 
 - name: Run bootstrap script
