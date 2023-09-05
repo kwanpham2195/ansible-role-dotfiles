@@ -60,5 +60,5 @@
 - name: Clone NeoVim config
   git:
     clone: true
-    repo: https://github.com/kwanpham2195/nvim.git
+    repo: https://github.com/kwanpham2195/lazyvim.git
     dest: ~/.config/nvim
